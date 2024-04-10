@@ -1,0 +1,45 @@
+{
+  "customComponentSupportVersion": "1",
+  "components": {
+    "TableauViz": {
+      "name": "Tableau Viz",
+      "model": [
+        {
+          "name": "VizURL",
+          "label": "Viz URL",
+          "type": "string",
+          "hidden": false,
+          "defaultValue": "https://public.tableau.com/views/DeveloperSuperstore/Overview",
+          "description": "URL of the Tableau Viz"
+        },
+        {
+          "name": "Toolbar",
+          "label": "Toolbar",
+          "type": "string",
+          "hidden": false,
+          "defaultValue": "bottom",
+          "description": "Toolbar: top, bottom, hidden"
+        },
+        {
+          "name": "Device",
+          "label": "Device",
+          "type": "string",
+          "hidden": false,
+          "defaultValue": "default",
+          "description": "Device: default, desktop, tablet, phone"
+        },
+        {
+          "name": "Embed Type",
+          "label": "Embed Type",
+          "type": "string",
+          "hidden": false,
+          "defaultValue": "Viz",
+          "description": "Embed Type: Viz or Authoring Mode"
+        }
+      ],
+      "events": [],
+      "defaultHeight": 5,
+      "defaultWidth": 2
+    }
+  }
+}
