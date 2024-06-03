@@ -1,40 +1,56 @@
 {
-  "customComponentSupportVersion": "1",
+  "customComponentSupportVersion": "2",
   "components": {
     "TableauViz": {
       "name": "Tableau Viz",
       "model": [
         {
-          "name": "VizURL",
-          "label": "Viz URL",
-          "type": "string",
-          "hidden": false,
-          "defaultValue": "https://public.tableau.com/views/DeveloperSuperstore/Overview",
-          "description": "URL of the Tableau Viz"
+          "name": "Tableau URL",
+          "type": "string"
         },
         {
-          "name": "Toolbar",
-          "label": "Toolbar",
-          "type": "string",
-          "hidden": false,
-          "defaultValue": "bottom",
-          "description": "Toolbar: top, bottom, hidden"
+          "name": "Toolbar Location",
+          "initialValue": "bottom",
+          "inspector": "select",
+          "label": "Toolbar Location",
+          "enumDefinition": [
+            "top",
+            "bottom",
+            "hidden"
+          ],
+          "description": "Select the toolbar location",
+          "type": "enumeration"
         },
         {
-          "name": "Device",
-          "label": "Device",
-          "type": "string",
-          "hidden": false,
-          "defaultValue": "default",
-          "description": "Device: default, desktop, tablet, phone"
+          "name": "Viewing Device",
+          "initialValue": "desktop",
+          "inspector": "select",
+          "label": "Viewing Device",
+          "enumDefinition": [
+            "desktop",
+            "default",
+            "phone",
+            "tablet"
+          ],
+          "description": "Select the viewing device",
+          "type": "enumeration"
         },
         {
           "name": "Embed Type",
+          "initialValue": "viz",
+          "inspector": "select",
           "label": "Embed Type",
-          "type": "string",
-          "hidden": false,
-          "defaultValue": "Viz",
-          "description": "Embed Type: Viz or Authoring Mode"
+          "enumDefinition": [
+            "viz",
+            "authoring"
+          ],
+          "description": "Select the embed type",
+          "type": "enumeration"
+        },
+        {
+          "name": "Hide Tabs",
+          "inspector": "checkbox",
+          "type": "boolean"
         }
       ],
       "events": [],
