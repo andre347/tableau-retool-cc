@@ -4,7 +4,7 @@ WIP for a custom component for Retool that allows you to embed Tableau dashboard
 
 #### To do
 
-- [ ] Apply the changes from the migration guide: https://docs.retool.com/private/custom-components-beta-migration
+- [x] Apply the changes from the migration guide: https://docs.retool.com/private/custom-components-beta-migration
 - [ ] Implement a way to pass in parameters to the Tableau dashboard
 - [ ] Implement a way to listen for events from the Tableau dashboard
 - [ ] Implement a way to generate token for embedding
