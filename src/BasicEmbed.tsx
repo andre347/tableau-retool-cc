@@ -51,6 +51,11 @@ export const TableauViz: FC = () => {
     name: 'Hide Tabs',
     inspector: 'checkbox',
   }) // true or false
+  const [worksheets, setWorksheets] = Retool.useStateArray({
+    name: 'Worksheets',
+    initialValue: [],
+    inspector: 'hidden',
+  })
 
   const vizContainer = useRef<any>(null)
 
@@ -59,28 +64,46 @@ export const TableauViz: FC = () => {
     const initializeViz = async () => {
       if (!viz) return
 
-      await new Promise((resolve) => {
+      await new Promise((resolve, reject) => {
         viz.addEventListener(TableauEventType.FirstInteractive, () => {
           console.log('Viz is interactive!')
           resolve(null)
         })
+        viz.addEventListener(TableauEventType.VizLoadError, (error: any) => {
+          const message = JSON.parse(error.detail.message)
+          const errorMessage = JSON.parse(message.errorMessage)
+
+          const displayMessage = `ca-error-${errorMessage.result.errors[0].code}`
+          reject(displayMessage)
+        })
       })
 
-      //   const dashboard = await viz.workbook.activateSheetAsync('Overview')
-      //   const worksheet = dashboard.worksheets.find((ws: any) => ws.name === 'SaleMap')
-      //   const worksheets = dashboard.worksheets.map((ws: any) => ws.name)
-      //   console.log('Worksheets:', worksheets)
+      let dashboard
+      let worksheets
+      if (viz.workbook.activeSheet.sheetType === 'dashboard') {
+        dashboard = viz.workbook.activeSheet
+
+        // Provide the name of the worksheet you want to use from the dashboard
+        worksheets = dashboard.worksheets.map((ws: any) => ws.name)
+        // set the worksheets to the state
+        setWorksheets(worksheets)
+      } else {
+        // Active sheet is already a worksheet
+        worksheets = viz.workbook.activeSheet
+        setWorksheets(worksheets)
+      }
+
       // Implement additional Tableau JS API methods here...
     }
 
     initializeViz()
-  }, [vizUrl, toolbar, device, embedType])
+  }, [vizUrl, toolbar, device, embedType, hideTabs, worksheets])
 
   return (
     <>
-      {embedType && (
+      {embedType && vizUrl ? (
         <>
-          {embedType === 'Viz' ? (
+          {embedType === 'viz' ? (
             <tableau-viz
               ref={vizContainer}
               src={vizUrl}
@@ -98,6 +121,8 @@ export const TableauViz: FC = () => {
             ></tableau-authoring-viz>
           )}
         </>
+      ) : (
+        <div>Please provide a Tableau dashboard URL</div>
       )}
     </>
   )

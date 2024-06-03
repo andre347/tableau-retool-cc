@@ -51,6 +51,12 @@
           "name": "Hide Tabs",
           "inspector": "checkbox",
           "type": "boolean"
+        },
+        {
+          "name": "Worksheets",
+          "initialValue": [],
+          "inspector": "hidden",
+          "type": "array"
         }
       ],
       "events": [],
